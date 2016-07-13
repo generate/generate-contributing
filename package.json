@@ -10,8 +10,10 @@
   },
   "license": "MIT",
   "files": [
+    "generator.js",
     "index.js",
-    "LICENSE"
+    "LICENSE",
+    "templates"
   ],
   "main": "index.js",
   "engines": {
@@ -49,6 +51,7 @@
     "frontend",
     "generate",
     "generateplugin",
+    "generate-plugin",
     "generator",
     "init",
     "initialize",
