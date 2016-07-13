@@ -10,8 +10,6 @@ require = utils;
 
 require('common-questions');
 require('fs-exists-sync', 'exists');
-require('gulp-choose-files', 'choose');
-require('gulp-pick-keys', 'pick');
 require('is-valid-app', 'isValid');
 require = fn;
 
