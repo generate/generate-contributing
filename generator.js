@@ -25,6 +25,7 @@ module.exports = function(app, base, env) {
    *
    * ```sh
    * $ gen contributing
+   * $ gen contributing --dest ./docs
    * ```
    * @name contributing
    * @api public

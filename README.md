@@ -48,7 +48,7 @@ If you do not see one or both of those events, please [let us know about it](../
 
 ## Tasks
 
-### [contributing](generator.js#L33)
+### [contributing](generator.js#L34)
 
 Generate a `contributing` file to the current working directory. To use a different destination directory, pass the path on the `-d` or `--dest` flag.
 
@@ -56,9 +56,10 @@ Generate a `contributing` file to the current working directory. To use a differ
 
 ```sh
 $ gen contributing
+$ gen contributing --dest ./docs
 ```
 
-### [contributing:setup](generator.js#L52)
+### [contributing:setup](generator.js#L53)
 
 Prepare questions and merge data to be used for prompts from the `base` instance onto the context.
 
