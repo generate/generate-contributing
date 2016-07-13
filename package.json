@@ -99,8 +99,12 @@
     },
     "reflinks": [
       "generate",
+      "verb",
       "verb-readme-generator",
-      "verb"
+      "gulp",
+      "base",
+      "assemble",
+      "verb-generate-readme"
     ],
     "lint": {
       "reflinks": true
