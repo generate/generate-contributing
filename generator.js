@@ -20,19 +20,29 @@ module.exports = function(app, base, env) {
   app.use(require('generate-defaults'));
 
   /**
-   * Generate a `contributing` file to the current working directory. To use
-   * a different destination directory, pass the path on the `-d` or `--dest` flag.
+   * Generate a `contributing` file to the current working directory.
+   *
+   * You can override the default template by adding a custom template
+   * at the following path: `~/templates/contributing.md` (in user home).
+   *
+   * To use a different destination directory, you can either:
+   *  - pass the path on the `-d` or `--dest` flag.
+   *  - pipe the [generate-dest](https://github.com/generate/generate-dest)
+   * plugin before `contributing`.
    *
    * ```sh
    * $ gen contributing
    * $ gen contributing --dest ./docs
+   * $ gen dest contributing
    * ```
    * @name contributing
    * @api public
    */
 
-  app.task('contributing', ['setup'], function(cb) {
-    var cwd = app.options.dest || app.cwd;
+  app.task('contributing', ['setup'], function (cb) {
+    var destFlag = app.options.d || app.options.dest || false;
+    destFlag = destFlag ? path.resolve(destFlag) : false;
+    var cwd = destFlag || base.options.dest || app.cwd;
     return app.src(src('contributing.md'))
       .pipe(app.renderFile('*'))
       .pipe(app.conflicts(cwd))
