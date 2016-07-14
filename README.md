@@ -4,9 +4,13 @@ Generate a contributing.md file for a project. Can be used as a plugin or sub-ge
 
 ## What is generate?
 
-Generate is a new, open source developer framework for rapidly initializing and scaffolding out new code projects, offering an intuitive CLI, and a powerful and expressive API that makes it easy and enjoyable to use.
+Generate is a command line tool and developer framework for scaffolding out new GitHub projects using [generators](https://github.com/generate/generate/blob/master/docs/generators.md) and [tasks](https://github.com/generate/generate/blob/master/docs/tasks.md). Answers to prompts and the user's environment can be used to determine the templates, directories, files and contents to build. Support for [gulp](http://gulpjs.com), [base](https://github.com/node-base/base) and [assemble](https://github.com/assemble/assemble) plugins, and much more.
 
-Visit the [getting started guide](https://github.com/generate/getting-started) or the [generate](https://github.com/generate/generate) project and documentation to learn more.
+For more information about Generate:
+
+* Visit the [generate project](https://github.com/generate/generate)
+* Visit the [generate documentation](https://github.com/generate/generate/blob/master/docs/)
+* Find [generators on npm](https://www.npmjs.com/browse/keyword/generate-generator) (help us [author generators](https://github.com/generate/generate/blob/master/docs/micro-generators.md))
 
 ## Usage
 
@@ -15,16 +19,6 @@ var contributing = require('generate-contributing');
 ```
 
 ## CLI
-
-**Installing the CLI**
-
-To run the `contributing` generator from the command line, you'll need to install [generate](https://github.com/generate/generate) globally first. You can do that now with the following command:
-
-```sh
-$ npm i -g generate
-```
-
-This adds the `gen` command to your system path, allowing it to be run from any directory.
 
 **Help**
 
@@ -54,21 +48,40 @@ If you do not see one or both of those events, please [let us know about it](../
 
 ## Tasks
 
-### [contributing](generator.js#L23)
+### [contributing](generator.js#L41)
 
-Generate a `contributing` file to the current working directory. You can override the default template by adding a custom template at the following path: `~/templates/contributing.md` (in user home).
+Generate a `contributing` file to the current working directory.
+
+You can override the default template by adding a custom template
+at the following path: `~/templates/contributing.md` (in user home).
+
+To override the destination directory, you can either:
+* pass the path on the `-d` or `--dest` flag.
+* pipe the [generate-dest](https://github.com/generate/generate-dest) plugin before `contributing`.
 
 **Example**
 
 ```sh
 $ gen contributing
+$ gen contributing --dest ./docs
+$ gen dest contributing
+```
+
+### [contributing:setup](generator.js#L62)
+
+Prepare questions and merge data to be used for prompts from the `base` instance onto the context.
+
+**Example**
+
+```sh
+$ gen contributing:setup
 ```
 
 ## API
 
-This updater can also be used as a node.js library in your own updater. To do so you must first install generate-contributing locally.
+### Install locally
 
-**Install**
+If you want to use `generate-contributing` as a plugin or sub-generator to extend the features and settings in your own generator, you must first install it locally:
 
 Install with [npm](https://www.npmjs.com/):
 
@@ -76,72 +89,55 @@ Install with [npm](https://www.npmjs.com/):
 $ npm install --save generate-contributing
 ```
 
-**Use as a plugin in your generator**
+### Use as a plugin
 
-Use as a plugin if you want to extend your own generator with the features, settings and tasks of generate-contributing, as if they were created on your generator.
-
-In your `generator.js`:
+Use as a [plugin](https://github.com/generate/generate/blob/master/docs/plugins.md) if you want to extend your own generator with the features, settings and tasks of `generate-contributing`, as if they were created on your generator:
 
 ```js
 module.exports = function(app) {
   app.use(require('generate-contributing'));
-
-  // specify any tasks from generate-contributing. Example:
-  app.task('default', ['contributing']);
 };
 ```
 
-**Use as a sub-generator**
+Visit Generate's [plugin docs](https://github.com/generate/generate/blob/master/docs/plugins.md) to learn more about plugins.
 
-Use as a sub-generator if you want expose the features, settings and tasks from generate-contributing on a _namespace_ in your generator.
+### Use as a sub-generator
 
-In your `generator.js`:
+Use as a [sub-generator](https://github.com/generate/generate/blob/master/docs/generators.md) if you want to add `generate-contributing` to a  _namespace_ in your generator:
 
 ```js
 module.exports = function(app) {
-  // register the generate-contributing generator (as a sub-generator with an arbitrary name)
+  // register the generate-contributing with whatever name you want
   app.register('foo', require('generate-contributing'));
-
-  app.task('minify', function(cb) {
-    // minify some stuff
-    cb();
-  });
-
-  // run the "default" task on generate-contributing (aliased as `foo`), 
-  // then run the `minify` task defined in our generator
-  app.task('default', function(cb) {
-    app.generate(['foo:default', 'minify'], cb);
-  });
 };
 ```
 
-Tasks from `generate-contributing` will be available on the `foo` namespace from the API and the command line. Continuing with the previous code example, to run the `default` task on `generate-contributing`, you would run `gen foo:default` (or just `gen foo` if `foo` does not conflict with an existing task on your generator).
+Visit Generate's [sub-generator docs](https://github.com/generate/generate/blob/master/docs/sub-generators.md) to learn more about sub-generators.
 
-To learn more about namespaces and sub-generators, and how they work, [visit the getting started guide](https://github.com/generate/getting-started).
+## About
 
-## Related projects
-
-You might also be interested in these projects:
+### Related projects
 
 * [generate-eslint](https://www.npmjs.com/package/generate-eslint): Generate a `.eslintrc.json` or `.eslintignore` file as part of a larger build workflow. This generator… [more](https://github.com/generate/generate-eslint) | [homepage](https://github.com/generate/generate-eslint "Generate a `.eslintrc.json` or `.eslintignore` file as part of a larger build workflow. This generator can be used as a sub-generator or plugin inside other generators.")
 * [generate-license](https://www.npmjs.com/package/generate-license): Generate a license file for a GitHub project. | [homepage](https://github.com/generate/generate-license "Generate a license file for a GitHub project.")
+* [generate-project](https://www.npmjs.com/package/generate-project): Scaffold out complete code projects from the command line, or use this generator as a… [more](https://github.com/generate/generate-project) | [homepage](https://github.com/generate/generate-project "Scaffold out complete code projects from the command line, or use this generator as a plugin in other generators to provide baseline functionality.")
 * [generate-travis](https://www.npmjs.com/package/generate-travis): Generate a .travis.yml file to the cwd or specified directory. Install globally and run with… [more](https://github.com/generate/generate-travis) | [homepage](https://github.com/generate/generate-travis "Generate a .travis.yml file to the cwd or specified directory. Install globally and run with generate's CLI, or use as a component in your own generator.")
 
-## Contributing
+### Contributing
 
-This document was generated by [verb-readme-generator](https://github.com/verbose/verb-readme-generator) (a [verb](https://github.com/verbose/verb) generator), please don't edit directly. Any changes to the readme must be made in [.verb.md](.verb.md). See [Building Docs](#building-docs).
+Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](../../issues/new).
 
-Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](../../issues/new). Or visit the [verb-readme-generator](https://github.com/verbose/verb-readme-generator) project to submit bug reports or pull requests for the readme layout template.
+### Building docs
 
-## Building docs
+_(This document was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme) (a [verb](https://github.com/verbose/verb) generator), please don't edit the readme directly. Any changes to the readme must be made in [.verb.md](.verb.md).)_
 
-Generate readme and API documentation with [verb](https://github.com/verbose/verb):
+To generate the readme and API documentation with [verb](https://github.com/verbose/verb):
 
 ```sh
-$ npm install -g verb verb-readme-generator && verb
+$ npm install -g verb verb-generate-readme && verb
 ```
 
-## Running tests
+### Running tests
 
 Install dev dependencies:
 
@@ -149,18 +145,18 @@ Install dev dependencies:
 $ npm install -d && npm test
 ```
 
-## Author
+### Author
 
 **Jon Schlinkert**
 
 * [github/jonschlinkert](https://github.com/jonschlinkert)
 * [twitter/jonschlinkert](http://twitter.com/jonschlinkert)
 
-## License
+### License
 
 Copyright © 2016, [Jon Schlinkert](https://github.com/jonschlinkert).
 Released under the [MIT license](https://github.com/generate/generate-contributing/blob/master/LICENSE).
 
 ***
 
-_This file was generated by [verb](https://github.com/verbose/verb), v0.9.0, on June 21, 2016._
+_This file was generated by [verb](https://github.com/verbose/verb), v0.9.0, on July 14, 2016._

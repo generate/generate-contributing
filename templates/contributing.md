@@ -18,7 +18,6 @@ Please keep in mind that open source software is built by people like you, who s
 
 Don't have time to contribute? No worries, here are some other ways to show your support for <%= name %>:
 
-- star the [project](<%= ask("homepage") %>)
 - tweet your support for <%= name %>
 
 ## Issues
