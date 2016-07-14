@@ -48,14 +48,14 @@ If you do not see one or both of those events, please [let us know about it](../
 
 ## Tasks
 
-### [contributing](generator.js#L41)
+### [contributing](generator.js#L33)
 
 Generate a `contributing` file to the current working directory.
 
 You can override the default template by adding a custom template
 at the following path: `~/templates/contributing.md` (in user home).
-
 To override the destination directory, you can either:
+
 * pass the path on the `-d` or `--dest` flag.
 * pipe the [generate-dest](https://github.com/generate/generate-dest) plugin before `contributing`.
 
@@ -65,16 +65,6 @@ To override the destination directory, you can either:
 $ gen contributing
 $ gen contributing --dest ./docs
 $ gen dest contributing
-```
-
-### [contributing:setup](generator.js#L62)
-
-Prepare questions and merge data to be used for prompts from the `base` instance onto the context.
-
-**Example**
-
-```sh
-$ gen contributing:setup
 ```
 
 ## API
