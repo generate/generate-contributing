@@ -1,22 +1,14 @@
 'use strict';
 
-var path = require('path');
-var utils = require('./utils');
+var isValid = require('is-valid-app');
 
 module.exports = function(app, base, env) {
-  if (!utils.isValid(app, 'generate-contributing')) return;
+  if (!isValid(app, 'generate-contributing')) return;
 
   /**
-   * Build variables
+   * Plugins
    */
 
-  var src = path.resolve.bind(path, __dirname, 'templates');
-
-  /**
-   * Use other generators as plugins
-   */
-
-  app.use(require('generate-collections'));
   app.use(require('generate-defaults'));
 
   /**
@@ -38,31 +30,11 @@ module.exports = function(app, base, env) {
    * @api public
    */
 
-  app.task('contributing', ['setup'], function (cb) {
-    var destFlag = app.options.d || app.options.dest || false;
-    destFlag = destFlag ? path.resolve(destFlag) : false;
-    var cwd = destFlag || base.options.dest || app.cwd;
-    return app.src(src('contributing.md'))
+  app.task('contributing', {silent: true}, function(cb) {
+    return app.src('templates/contributing.md', {cwd: __dirname})
       .pipe(app.renderFile('*'))
-      .pipe(app.conflicts(cwd))
-      .pipe(app.dest(cwd));
-  });
-
-  /**
-   * Prepare questions and merge data to be used for prompts from the `base` instance
-   * onto the context.
-   *
-   * ```sh
-   * $ gen contributing:setup
-   * ```
-   * @name contributing:setup
-   * @api public
-   */
-
-  app.task('setup', function(cb) {
-    app.data(app.base.cache.data);
-    app.use(utils.commonQuestions());
-    cb();
+      .pipe(app.conflicts(app.cwd))
+      .pipe(app.dest(app.cwd));
   });
 
   /**

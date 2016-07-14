@@ -36,18 +36,14 @@ describe('generate-contributing', function() {
     app.option('askWhen', 'not-answered');
 
     // provide template data to avoid prompts
+    app.data(require('./package'));
     app.data({
       author: {
         name: 'Jon Schlinkert',
         username: 'jonschlnkert',
         url: 'https://github.com/jonschlinkert'
-      },
-      project: {
-        name: 'foo',
-        description: 'bar',
-        version: '0.1.0'
       }
-    });
+    })
   });
 
   describe('plugin', function() {
