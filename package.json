@@ -6,7 +6,7 @@
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "generate/generate-contributing",
   "bugs": {
-    "url": "https://github.com/jonschlinkert/generate-contributing/issues"
+    "url": "https://github.com/generate/generate-contributing/issues"
   },
   "license": "MIT",
   "files": [
@@ -54,8 +54,10 @@
     "front",
     "frontend",
     "generate",
-    "generateplugin",
+    "generate-generator",
     "generate-plugin",
+    "generategenerator",
+    "generateplugin",
     "generator",
     "init",
     "initialize",
@@ -91,20 +93,20 @@
     ],
     "related": {
       "list": [
-        "generate-license",
-        "generate-travis",
         "generate-eslint",
-        "generate-project"
+        "generate-license",
+        "generate-project",
+        "generate-travis"
       ]
     },
     "reflinks": [
-      "generate",
-      "verb",
-      "verb-readme-generator",
-      "gulp",
-      "base",
       "assemble",
-      "verb-generate-readme"
+      "base",
+      "generate",
+      "gulp",
+      "verb",
+      "verb-generate-readme",
+      "verb-readme-generator"
     ],
     "lint": {
       "reflinks": true
