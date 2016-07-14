@@ -25,10 +25,9 @@ module.exports = function(app, base, env) {
    * You can override the default template by adding a custom template
    * at the following path: `~/templates/contributing.md` (in user home).
    *
-   * To use a different destination directory, you can either:
+   * To override the destination directory, you can either:
    *  - pass the path on the `-d` or `--dest` flag.
-   *  - pipe the [generate-dest](https://github.com/generate/generate-dest)
-   * plugin before `contributing`.
+   *  - pipe the [generate-dest](https://github.com/generate/generate-dest) plugin before `contributing`.
    *
    * ```sh
    * $ gen contributing
