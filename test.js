@@ -21,9 +21,7 @@ function exists(name, cb) {
 
     fs.stat(filepath, function(err, stat) {
       if (err) return cb(err);
-      assert(stat);
-      // del(path.dirname(filepath), cb);
-      cb();
+      del(actual(), cb);
     });
   };
 }
