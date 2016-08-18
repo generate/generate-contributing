@@ -1,3 +1,6 @@
+---
+layout: nil
+---
 # Contributing to <%= ask("name") %>
 
 First and foremost, thank you! We appreciate that you want to contribute to <%= ask("name") %>, your time is valuable, and your contributions mean a lot to us.
