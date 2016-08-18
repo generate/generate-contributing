@@ -12,19 +12,13 @@ module.exports = function(app, base, env) {
   app.use(require('generate-defaults'));
 
   /**
-   * Generate a `contributing` file to the current working directory.
-   *
-   * You can override the default template by adding a custom template
-   * at the following path: `~/templates/contributing.md` (in user home).
-   *
-   * To override the destination directory, you can either:
-   *  - pass the path on the `-d` or `--dest` flag.
-   *  - pipe the [generate-dest](https://github.com/generate/generate-dest) plugin before `contributing`.
+   * Generate a `contributing` file to the current working directory. You can override
+   * the default template by adding a custom template to `~/templates/contributing.md`
+   * (in user home on your system).
    *
    * ```sh
    * $ gen contributing
    * $ gen contributing --dest ./docs
-   * $ gen dest contributing
    * ```
    * @name contributing
    * @api public
