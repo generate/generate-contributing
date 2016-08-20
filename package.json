@@ -1,7 +1,7 @@
 {
   "name": "generate-contributing",
-  "description": "Generate a contributing.md file for a project. Can be used as a plugin or sub-generator in a higher-level generator.",
-  "version": "0.2.1",
+  "description": "Generate a contributing.md, issue_template.md, or pull_request_template.md file for a project. Can be generated from the command line when Generate is installed globally, or as a plugin inside another generator.",
+  "version": "0.2.2",
   "homepage": "https://github.com/generate/generate-contributing",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "generate/generate-contributing",
@@ -33,7 +33,8 @@
     "generate": "^0.7.3",
     "global-modules": "^0.2.2",
     "gulp-format-md": "^0.1.9",
-    "mocha": "^2.5.3"
+    "mocha": "^2.5.3",
+    "verb-repo-data": "^0.1.11"
   },
   "keywords": [
     "app",
@@ -79,7 +80,9 @@
     ]
   },
   "verb": {
-    "toc": false,
+    "toc": {
+      "method": "preWrite"
+    },
     "layout": "generator",
     "tasks": [
       "readme"
