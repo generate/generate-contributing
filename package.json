@@ -1,7 +1,7 @@
 {
   "name": "generate-contributing",
   "description": "Generate a contributing.md, issue_template.md, or pull_request_template.md file for a project. Can be generated from the command line when Generate is installed globally, or as a plugin inside another generator.",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "homepage": "https://github.com/generate/generate-contributing",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "generate/generate-contributing",
