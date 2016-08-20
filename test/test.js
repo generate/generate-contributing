@@ -8,7 +8,7 @@ var generate = require('generate');
 var gm = require('global-modules');
 var existsSync = require('fs-exists-sync');
 var del = require('delete');
-var generator = require('./');
+var generator = require('..');
 var app;
 
 var actual = path.resolve.bind(path, __dirname, 'actual');
@@ -34,14 +34,7 @@ describe('generate-contributing', function() {
     app.option('askWhen', 'not-answered');
 
     // provide template data to avoid prompts
-    app.data(require('./package'));
-    app.data({
-      author: {
-        name: 'Jon Schlinkert',
-        username: 'jonschlnkert',
-        url: 'https://github.com/jonschlinkert'
-      }
-    })
+    app.data(require('verb-repo-data'))
   });
 
   describe('plugin', function() {
