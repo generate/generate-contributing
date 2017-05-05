@@ -12,7 +12,7 @@ module.exports = function(app, base, env) {
   app.use(require('generate-defaults'));
 
   /**
-   * Generate a `contributing` file to the current working directory.
+   * Generate a `contributing.md` file.
    *
    * ```sh
    * $ gen contributing
