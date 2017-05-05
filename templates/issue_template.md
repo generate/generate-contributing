@@ -1,4 +1,4 @@
-(Thanks for reporting an issue! Please make sure you click the link above to read contributor guidelines, then fill out the details below)
+_(Thanks for reporting an issue to <%= name %>! If you haven't already read the [contributor guidelines](contributing.md), Please do that now, then procede to fill out the details below.)_
 
 ## What are the minimum necessary steps to reproduce this issue?
 
