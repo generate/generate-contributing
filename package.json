@@ -26,17 +26,17 @@
     "test": "mocha"
   },
   "dependencies": {
-    "generate-defaults": "^0.6.0",
-    "is-valid-app": "^0.2.0"
+    "generate-defaults": "^0.6.6",
+    "is-valid-app": "^0.3.0"
   },
   "devDependencies": {
     "delete": "^0.3.2",
     "fs-exists-sync": "^0.1.0",
-    "generate": "^0.7.3",
-    "global-modules": "^0.2.2",
-    "gulp-format-md": "^0.1.9",
-    "mocha": "^2.5.3",
-    "verb-repo-data": "^0.1.11"
+    "generate": "^0.13.1",
+    "global-modules": "^0.2.3",
+    "gulp-format-md": "^0.1.12",
+    "mocha": "^3.3.0",
+    "verb-repo-data": "^0.1.15"
   },
   "keywords": [
     "app",
