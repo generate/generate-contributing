@@ -6,7 +6,6 @@ var path = require('path');
 var assert = require('assert');
 var generate = require('generate');
 var gm = require('global-modules');
-var existsSync = require('fs-exists-sync');
 var del = require('delete');
 var generator = require('..');
 var app;
@@ -80,7 +79,7 @@ describe('generate-contributing', function() {
   });
 
   if (!process.env.CI && !process.env.TRAVIS) {
-    if (!existsSync(path.resolve(gm, 'generate-contributing'))) {
+    if (!fs.existsSync(path.resolve(gm, 'generate-contributing'))) {
       console.log('generate-contributing is not installed globally, skipping CLI tests');
     } else {
       describe('generator (CLI)', function() {
