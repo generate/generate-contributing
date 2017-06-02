@@ -13,6 +13,7 @@ By contributing to this project, you:
 * Agree that you have the necessary rights to the content
 * Agree that you have received the necessary permissions from your employer to make the contributions (if applicable)
 * Agree that the content you contribute may be provided under the Project license(s)
+* Agree that, if you did not author 100% of the content, the appropriate licenses and copyrights have been added along with any other necessary attribution.
 
 ## Getting started
 
@@ -37,6 +38,10 @@ Don't have time to contribute? No worries, here are some other ways to show your
 
 ## Issues
 
+Please only create issues for bug reports or feature requests. Issues discussing any other topics may be closed by the project's maintainers without further explanation.
+
+Do not create issues about bumping dependencies unless a bug has been identified and you can demonstrate that it effects this library.
+
 ### Before creating an issue
 
 Please try to determine if the issue is caused by an underlying library, and if so, create the issue there. Sometimes this is difficult to know. We only ask that you attempt to give a reasonable attempt to find out. Oftentimes the readme will have advice about where to go to create issues.
@@ -58,7 +63,7 @@ Please be as descriptive as possible when creating an issue. Give us the informa
 
 ### Closing issues
 
-The original poster or the maintainer's of <%= ask("name") %> may close an issue at any time. Typically, but not exclusively, issues are closed when:
+The original poster or the maintainers of <%= ask("name") %> may close an issue at any time. Typically, but not exclusively, issues are closed when:
 
 - The issue is resolved
 - The project's maintainers have determined the issue is out of scope
