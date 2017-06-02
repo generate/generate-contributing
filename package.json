@@ -30,12 +30,11 @@
     "is-valid-app": "^0.3.0"
   },
   "devDependencies": {
-    "delete": "^0.3.2",
-    "fs-exists-sync": "^0.1.0",
-    "generate": "^0.13.1",
+    "delete": "^1.0.1",
+    "generate": "^0.14.0",
     "global-modules": "^0.2.3",
     "gulp-format-md": "^0.1.12",
-    "mocha": "^3.3.0",
+    "mocha": "^3.4.2",
     "verb-repo-data": "^0.1.15"
   },
   "keywords": [
