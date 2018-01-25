@@ -1,12 +1,13 @@
 'use strict';
 
-var isValid = require('is-valid-app');
+const path = require('path');
+const isValid = require('is-valid-app');
 
-module.exports = function(app, base, env) {
+module.exports = function(app) {
   if (!isValid(app, 'generate-contributing')) return;
 
   /**
-   * Plugins
+   * Register generate-defaults as a plugin
    */
 
   app.use(require('generate-defaults'));
@@ -22,10 +23,8 @@ module.exports = function(app, base, env) {
    * @api public
    */
 
-  app.task('default', ['contributing']);
-  app.task('contributing', {silent: true}, function(cb) {
-    return file(app, 'templates/contributing.md');
-  });
+  task('default', ['contributing']);
+  task('contributing', () => template('contributing.md'));
 
   /**
    * Generate an `issue_template.md` file to the `.github/` directory, or specified `--dest`.
@@ -40,10 +39,8 @@ module.exports = function(app, base, env) {
    * @api public
    */
 
-  app.task('it', ['issue_template']);
-  app.task('issue_template', {silent: true}, function(cb) {
-    return file(app, 'templates/issue_template.md');
-  });
+  task('it', ['issue_template']);
+  task('issue_template', () => template('issue_template.md'));
 
   /**
    * Generate a bare bones `issue_template.md` file to the `.github/` directory, or specified `--dest`.
@@ -59,10 +56,8 @@ module.exports = function(app, base, env) {
    * @api public
    */
 
-  app.task('itb', ['issue_template_basic']);
-  app.task('issue_template_basic', {silent: true}, function(cb) {
-    return file(app, 'templates/issue_template_basic.md');
-  });
+  task('itb', ['issue_template_basic']);
+  task('issue_template_basic', () => template('issue_template_basic.md'));
 
   /**
    * Generate a detailed `issue_template.md` file to the `.github/` directory, or specified `--dest`.
@@ -78,10 +73,8 @@ module.exports = function(app, base, env) {
    * @api public
    */
 
-  app.task('itd', ['issue_template_detailed']);
-  app.task('issue_template_detailed', {silent: true}, function(cb) {
-    return file(app, 'templates/issue_template_detailed.md');
-  });
+  task('itd', ['issue_template_detailed']);
+  task('issue_template_detailed', () => template('issue_template_detailed.md'));
 
   /**
    * Generate a `pull_request_template.md` file to the `.github/` directory, or specified `--dest`.
@@ -91,16 +84,14 @@ module.exports = function(app, base, env) {
    * $ gen contributing:pr
    * $ gen contributing:pr --dest ./docs
    * # also aliased as the following (mostly for API usage)
-   * $ gen contributing:pull_request_template
+   * $ gen contributing:pr_template
    * ```
    * @name contributing:pr
    * @api public
    */
 
-  app.task('pr', ['pull_request_template']);
-  app.task('pull_request_template', {silent: true}, function(cb) {
-    return file(app, 'templates/pull_request_template.md');
-  });
+  task('pr', ['pr_template']);
+  task('pr_template', () => template('pull_request_template.md'));
 
   /**
    * Generate a detailed `pull_request_template.md` file to the `.github/` directory, or specified `--dest`.
@@ -109,26 +100,32 @@ module.exports = function(app, base, env) {
    * ```sh
    * $ gen contributing:prd
    * $ gen contributing:prd --dest ./docs
-   * # also aliased as the following (mostly for API usage)
-   * $ gen contributing:pull_request_template_detailed
+   * # also aliased as the following (for API usage, when it helps to be explicit in code)
+   * $ gen contributing:pr_template_detailed
    * ```
    * @name contributing:prd
    * @api public
    */
 
-  app.task('prd', ['pull_request_template_detailed.md']);
-  app.task('pull_request_template_detailed.md', {silent: true}, function(cb) {
-    return file(app, 'templates/pull_request_template_detailed.md.md');
-  });
+  task('prd', ['pr_template_detailed']);
+  task('pr_template_detailed', () => template('pull_request_template_detailed.md'));
+
+  /**
+   * Generate a file from the template that matches the given `pattern`
+   */
+
+  function template(pattern) {
+    return app.src(pattern, { cwd: path.join(__dirname, 'templates') })
+      .pipe(app.renderFile('*')).on('error', console.error)
+      .pipe(app.conflicts(app.cwd))
+      .pipe(app.dest(app.options.dest || app.cwd));
+  }
+
+  /**
+   * Create a silent task
+   */
+
+  function task(name, ...deps) {
+    app.task(name, { silent: true }, ...deps);
+  }
 };
-
-/**
- * Generate files that match the given `pattern`
- */
-
-function file(app, pattern) {
-  return app.src(pattern, { cwd: __dirname })
-    .pipe(app.renderFile('*')).on('error', console.log)
-    .pipe(app.conflicts(app.cwd))
-    .pipe(app.dest(app.cwd));
-}
